@@ -1,7 +1,6 @@
 package com.cks.ciftcikredisistemi.entity.hayvan;
 
 import com.cks.ciftcikredisistemi.entity.ciftci.CiftciVarlik;
-import com.cks.ciftcikredisistemi.entity.hayvan.HayvanIrk;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -17,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="HayvansalVarlik")
+@Table(name="hayvansal_varlik")
 public class HayvansalVarlik {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +30,4 @@ public class HayvansalVarlik {
     private  BigDecimal toplamVarlikDegeri;
     @OneToMany(mappedBy="hayvansalVarlik")
     private Set<HayvansalVarlikGelir> hayvansalVarlikGelir;
-
-
-
-
 }

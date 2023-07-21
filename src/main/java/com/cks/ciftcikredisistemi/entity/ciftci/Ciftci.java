@@ -2,16 +2,12 @@ package com.cks.ciftcikredisistemi.entity.ciftci;
 
 import com.cks.ciftcikredisistemi.entity.base.BaseEntity;
 import com.cks.ciftcikredisistemi.entity.kredi.KrediBasvuru;
-import com.cks.ciftcikredisistemi.enums.KrediDurum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -19,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Ciftci")
+@Table(name="ciftci")
 public class Ciftci extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,5 +29,4 @@ public class Ciftci extends BaseEntity {
     private Set<KrediBasvuru> krediBasvuru;
     @OneToMany(mappedBy="ciftci")
     private Set<CiftciVarlik> ciftciVarlik;
-
 }

@@ -17,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="KrediBasvuru")
+@Table(name="kredi_basvuru")
 public class KrediBasvuru  extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

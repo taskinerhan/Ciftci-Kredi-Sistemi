@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="HayvansalVarlikGelir")
+@Table(name="hayvansal_varlik_gelir")
 public class HayvansalVarlikGelir extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

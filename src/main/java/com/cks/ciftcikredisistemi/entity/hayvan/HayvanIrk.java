@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -16,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="HayvanIrk")
+@Table(name="hayvan_irk")
 public class HayvanIrk extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

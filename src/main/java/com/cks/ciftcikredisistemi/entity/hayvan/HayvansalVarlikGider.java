@@ -2,7 +2,6 @@ package com.cks.ciftcikredisistemi.entity.hayvan;
 
 import com.cks.ciftcikredisistemi.entity.base.BaseEntity;
 import com.cks.ciftcikredisistemi.enums.Birim;
-import com.cks.ciftcikredisistemi.enums.Cinsiyet;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="HayvansalVarlikGider")
+@Table(name="hayvansal_varlik_gider")
 public class HayvansalVarlikGider extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
