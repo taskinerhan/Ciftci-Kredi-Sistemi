@@ -19,14 +19,18 @@ public class HayvansalVarlikGider extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String ad;
     @Enumerated(EnumType.STRING)
+
     private Birim birim;
     private BigDecimal miktar;
     private BigDecimal toplamFiyat;
+
     @OneToOne
     @JoinColumn(name = "hayvansal_gider_id")
     private HayvansalGider hayvansalGider;
+
     @ManyToOne
     @JoinColumn(name = "hayvansal_varlik_id")
     private HayvansalVarlik hayvansalVarlik;

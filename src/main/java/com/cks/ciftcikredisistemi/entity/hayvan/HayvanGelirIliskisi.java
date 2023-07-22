@@ -19,16 +19,20 @@ public class HayvanGelirIliskisi extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Enumerated(EnumType.STRING)
     private Cinsiyet cinsiyet;
+
     private BigDecimal bigDecimal;
+
     @OneToOne
     @JoinColumn(name = "hayvansal_gelir_id")
     private HayvansalGelir hayvansalGelir;
-    @Enumerated(EnumType.STRING)
+
     @OneToOne
     @JoinColumn(name = "hayvan_irk_id")
     private HayvanIrk hayvanIrk;
+
     @OneToOne
     @JoinColumn(name = "hayvansal_gider_id")
     private HayvansalGider hayvansalGider;

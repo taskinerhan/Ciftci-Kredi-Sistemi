@@ -20,13 +20,18 @@ public class HayvanIrk extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String ad;
+
     @Enumerated(EnumType.STRING)
     private HayvanTuru hayvanTuru;
+
     @OneToOne(mappedBy = "hayvanIrk")
     private HayvansalGiderIliskisi hayvansalGiderIliskisi;
+
     @OneToOne(mappedBy = "hayvanIrk")
     private HayvanGelirIliskisi hayvanGelirIliskisi;
+
     @OneToMany(mappedBy="hayvanIrk")
     private Set<HayvansalVarlik> hayvansalVarlik;
 }

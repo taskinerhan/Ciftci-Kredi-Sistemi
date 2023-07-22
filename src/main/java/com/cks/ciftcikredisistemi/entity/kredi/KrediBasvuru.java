@@ -22,12 +22,16 @@ public class KrediBasvuru  extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Enumerated(EnumType.STRING)
     private KrediDurum krediDurum;
+
     private Date basvuruTarihi;
     private BigDecimal talepEdilenKrediMiktari;
+
     @OneToOne(mappedBy = "krediBasvuru")
     private CiftciVarlik ciftciVarlik;
+
     @ManyToOne
     @JoinColumn(name = "ciftci_id")
     private Ciftci ciftci;

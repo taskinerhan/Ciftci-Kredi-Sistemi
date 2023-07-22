@@ -19,9 +19,12 @@ public class HayvansalGider extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String ad;
+
     @Enumerated(EnumType.STRING)
     private Birim birim;
+
     private BigDecimal birimFiyat;
 
     @OneToOne(mappedBy = "hayvansalGider")
@@ -29,5 +32,4 @@ public class HayvansalGider extends BaseEntity {
 
     @OneToOne(mappedBy = "hayvansalGider")
     private HayvansalGiderIliskisi hayvansalGiderIliskisi;
-
 }

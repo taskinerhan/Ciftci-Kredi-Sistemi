@@ -20,14 +20,18 @@ public class HayvansalVarlik {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private  BigDecimal hayvanAdeti;
+    private  BigDecimal toplamVarlikDegeri;
+
     @ManyToOne
     @JoinColumn(name="ciftci_varlik_id", nullable=false)
     private CiftciVarlik ciftciVarlik;
+
     @ManyToOne
     @JoinColumn(name = "hayvan_irk_id")
     private HayvanIrk hayvanIrk;
-    private  BigDecimal hayvanAdeti;
-    private  BigDecimal toplamVarlikDegeri;
+
     @OneToMany(mappedBy="hayvansalVarlik")
     private Set<HayvansalVarlikGelir> hayvansalVarlikGelir;
 }

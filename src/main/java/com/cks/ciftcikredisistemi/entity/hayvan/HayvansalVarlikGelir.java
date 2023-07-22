@@ -19,8 +19,10 @@ public class HayvansalVarlikGelir extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String ad;
     @Enumerated(EnumType.STRING)
+
     private Birim birim;
     private BigDecimal miktar;
     private BigDecimal toplamFiyat;
@@ -28,6 +30,7 @@ public class HayvansalVarlikGelir extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "hayvansal_gelir_id")
     private HayvansalGelir hayvansalGelir;
+
     @ManyToOne
     @JoinColumn(name = "hayvansal_varlik_id")
     private HayvansalVarlik hayvansalVarlik;
