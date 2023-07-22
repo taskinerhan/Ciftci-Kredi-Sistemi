@@ -21,9 +21,10 @@ public class HayvansalVarlikGelir extends BaseEntity {
     private long id;
 
     private String ad;
-    @Enumerated(EnumType.STRING)
 
+    @Enumerated(EnumType.STRING)
     private Birim birim;
+
     private BigDecimal miktar;
     private BigDecimal toplamFiyat;
 
