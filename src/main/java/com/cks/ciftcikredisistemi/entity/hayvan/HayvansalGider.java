@@ -9,12 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="hayvansal_gider")
+@Table(name = "hayvansal_gider")
 public class HayvansalGider extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

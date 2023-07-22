@@ -15,23 +15,23 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="hayvansal_varlik")
+@Table(name = "hayvansal_varlik")
 public class HayvansalVarlik {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private  BigDecimal hayvanAdeti;
-    private  BigDecimal toplamVarlikDegeri;
+    private BigDecimal hayvanAdeti;
+    private BigDecimal toplamVarlikDegeri;
 
     @ManyToOne
-    @JoinColumn(name="ciftci_varlik_id", nullable=false)
+    @JoinColumn(name = "ciftci_varlik_id", nullable = false)
     private CiftciVarlik ciftciVarlik;
 
     @ManyToOne
     @JoinColumn(name = "hayvan_irk_id")
     private HayvanIrk hayvanIrk;
 
-    @OneToMany(mappedBy="hayvansalVarlik")
+    @OneToMany(mappedBy = "hayvansalVarlik")
     private Set<HayvansalVarlikGelir> hayvansalVarlikGelir;
 }

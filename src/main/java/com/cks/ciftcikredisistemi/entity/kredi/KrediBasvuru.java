@@ -12,13 +12,14 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="kredi_basvuru")
-public class KrediBasvuru  extends BaseEntity{
+@Table(name = "kredi_basvuru")
+public class KrediBasvuru extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

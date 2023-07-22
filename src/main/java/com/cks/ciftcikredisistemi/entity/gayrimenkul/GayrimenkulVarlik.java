@@ -10,23 +10,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="gayrimenkul_varlik")
+@Table(name = "gayrimenkul_varlik")
 public class GayrimenkulVarlik extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String ada;
     private String parsel;
     private double yuzOlcumu;
+
     @Enumerated(EnumType.STRING)
     private GayrimenkulTipi gayrimenkulTipi;
+
     private BigDecimal gayrimenkulDegeri;
+
     @ManyToOne
-    @JoinColumn(name="ciftci_varlik_id")
+    @JoinColumn(name = "ciftci_varlik_id")
     private CiftciVarlik ciftciVarlik;
 }

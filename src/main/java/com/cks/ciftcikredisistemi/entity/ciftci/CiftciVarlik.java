@@ -18,22 +18,26 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="ciftci_varlik")
+@Table(name = "ciftci_varlik")
 public class CiftciVarlik extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private BigDecimal gayrimenkulToplam;
+    private BigDecimal hayvansalToplam;
+
     @ManyToOne
     @JoinColumn(name = "ciftci_id")
     private Ciftci ciftci;
-    private BigDecimal gayrimenkulToplam;
-    private BigDecimal hayvansalToplam;
+
     @OneToOne
     @JoinColumn(name = "kredi_basvuru_id")
     private KrediBasvuru krediBasvuru;
+
     @OneToMany(mappedBy = "ciftciVarlik")
     private Set<GayrimenkulVarlik> gayrimenkulVarlikList;
+
     @OneToMany(mappedBy = "ciftciVarlik")
     private Set<HayvansalVarlik> hayvansalVarlik;
-
 }

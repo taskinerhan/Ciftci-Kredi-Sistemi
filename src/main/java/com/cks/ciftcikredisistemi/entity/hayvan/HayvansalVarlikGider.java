@@ -9,12 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="hayvansal_varlik_gider")
+@Table(name = "hayvansal_varlik_gider")
 public class HayvansalVarlikGider extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +36,4 @@ public class HayvansalVarlikGider extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "hayvansal_varlik_id")
     private HayvansalVarlik hayvansalVarlik;
-
 }

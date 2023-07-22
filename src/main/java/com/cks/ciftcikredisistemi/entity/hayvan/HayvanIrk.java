@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="hayvan_irk")
+@Table(name = "hayvan_irk")
 public class HayvanIrk extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +32,6 @@ public class HayvanIrk extends BaseEntity {
     @OneToOne(mappedBy = "hayvanIrk")
     private HayvanGelirIliskisi hayvanGelirIliskisi;
 
-    @OneToMany(mappedBy="hayvanIrk")
+    @OneToMany(mappedBy = "hayvanIrk")
     private Set<HayvansalVarlik> hayvansalVarlik;
 }

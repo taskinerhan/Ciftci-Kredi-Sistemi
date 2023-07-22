@@ -5,7 +5,7 @@ import jakarta.persistence.MappedSuperclass;
 import java.util.Date;
 
 @MappedSuperclass
-public class BaseEntity {
+public abstract class BaseEntity {
     private Date kayitTarihi;
     private Date guncellemTarihi;
 }
