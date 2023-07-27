@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,22 +42,27 @@ public class CiftciYonetimController {
         ciftciYonetimiRepository.save(ciftci);
         return ResponseEntity.status(HttpStatus.CREATED).body("Çiftçi eklendi");
     }
-
-    @SneakyThrows
-    @PostMapping( value = "/ciftci-yonetimi/yukle2")
-    public ResponseEntity<?> ciftciList2() {
-        return ResponseEntity.status(HttpStatus.CREATED).body("Başarılı bir şekilde oluşturuldu");
-    }
-
     @SneakyThrows
     @PostMapping(value = "/ciftci-yonetimi/yukle", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> ciftciList(@RequestParam(name = "csvFile") MultipartFile csvFile) {
-        List<CsvBean> ciftciList;
+        List<CsvBean> csvBeanList;
         try (Reader reader = new InputStreamReader(csvFile.getInputStream())) {
             CsvToBean<CsvBean> cb = new CsvToBeanBuilder<CsvBean>(reader)
-                    .withType(CsvBean.class)
+                    .withType(CiftciDto.class)
                     .build();
-            ciftciList = cb.parse();
+            csvBeanList = cb.parse();
+        }
+        List<Ciftci> ciftciList = new ArrayList<>();
+
+        for (CsvBean csvBean : csvBeanList) {
+            CiftciDto ciftciDto = (CiftciDto) csvBean;
+            Ciftci ciftci = new Ciftci();
+            ciftci.setAd(ciftciDto.getAd());
+            ciftci.setSoyad(ciftciDto.getSoyad());
+            ciftci.setCinsiyet(ciftciDto.getCinsiyet());
+            ciftci.setTcko(ciftciDto.getTcko());
+            ciftci.setDogumTarihi(ciftciDto.getDogumTarihi());
+            ciftciList.add(ciftci);
         }
         ciftciYonetimiRepository.saveAll(ciftciList);
         return ResponseEntity.status(HttpStatus.CREATED).body("Başarılı bir şekilde oluşturuldu");
