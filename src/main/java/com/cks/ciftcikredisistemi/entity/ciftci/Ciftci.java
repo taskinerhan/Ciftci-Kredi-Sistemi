@@ -2,6 +2,7 @@ package com.cks.ciftcikredisistemi.entity.ciftci;
 
 import com.cks.ciftcikredisistemi.entity.base.BaseEntity;
 import com.cks.ciftcikredisistemi.entity.kredi.KrediBasvuru;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,9 +29,11 @@ public class Ciftci extends BaseEntity {
     private String tcko;
     private Date dogumTarihi;
 
-    @OneToMany(mappedBy = "ciftci")
+    @JsonManagedReference
+    @OneToMany(mappedBy="ciftci")
     private Set<KrediBasvuru> krediBasvuru;
 
-    @OneToMany(mappedBy = "ciftci")
+    @JsonManagedReference
+    @OneToMany(mappedBy="ciftci")
     private Set<CiftciVarlik> ciftciVarlik;
 }

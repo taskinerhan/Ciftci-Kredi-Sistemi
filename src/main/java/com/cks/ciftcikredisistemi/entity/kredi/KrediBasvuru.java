@@ -4,6 +4,7 @@ import com.cks.ciftcikredisistemi.entity.base.BaseEntity;
 import com.cks.ciftcikredisistemi.entity.ciftci.Ciftci;
 import com.cks.ciftcikredisistemi.entity.ciftci.CiftciVarlik;
 import com.cks.ciftcikredisistemi.enums.KrediDurum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,6 +35,7 @@ public class KrediBasvuru extends BaseEntity {
     private CiftciVarlik ciftciVarlik;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "ciftci_id")
     private Ciftci ciftci;
 }

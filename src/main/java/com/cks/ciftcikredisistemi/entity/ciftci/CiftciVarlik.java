@@ -4,6 +4,7 @@ import com.cks.ciftcikredisistemi.entity.base.BaseEntity;
 import com.cks.ciftcikredisistemi.entity.gayrimenkul.GayrimenkulVarlik;
 import com.cks.ciftcikredisistemi.entity.hayvan.HayvansalVarlik;
 import com.cks.ciftcikredisistemi.entity.kredi.KrediBasvuru;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class CiftciVarlik extends BaseEntity {
     private BigDecimal hayvansalToplam;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "ciftci_id")
     private Ciftci ciftci;
 
