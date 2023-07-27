@@ -21,7 +21,7 @@ public class HayvansalGelirController {
         if (hayvansalGelirDto == null) {
             return ResponseEntity
                     .status(HttpStatus.UNPROCESSABLE_ENTITY)
-                    .body("Hayvan ırk bilgileri geçersiz veya eksik.");
+                    .body("Girilen bilgiler geçersiz veya eksik.");
         }
         HayvansalGelir hayvansalGelir = new HayvansalGelir();
         hayvansalGelir.setAd(hayvansalGelirDto.getAd());
@@ -42,9 +42,8 @@ public class HayvansalGelirController {
         if(hayvansalGelir==null){
             return ResponseEntity
                     .status(HttpStatus.UNPROCESSABLE_ENTITY)
-                    .body("Hayvan ırk bilgileri geçersiz veya eksik.");
+                    .body("Girilen bilgiler geçersiz veya eksik.");
         }
-
         return ResponseEntity.status(HttpStatus.OK).body(hayvansalGelir);
     }
 
