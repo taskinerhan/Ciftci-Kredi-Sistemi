@@ -23,7 +23,6 @@ public class HayvanIrkController {
                     .status(HttpStatus.UNPROCESSABLE_ENTITY)
                     .body("Hayvan ırk bilgileri geçersiz veya eksik.");
         }
-
         HayvanIrk hayvanIrk = new HayvanIrk();
         hayvanIrk.setAd(hayvanIrkDto.getAd());
         hayvanIrk.setHayvanTuru(hayvanIrkDto.getHayvanTuru());
@@ -34,11 +33,6 @@ public class HayvanIrkController {
     @GetMapping("irklar")
     public ResponseEntity<?> hayvanIrkListGetir() {
         List<HayvanIrk> hayvanIrkList = hayvanIrkRepository.findAll();
-        if (hayvanIrkList.isEmpty()) {
-            return ResponseEntity
-                    .status(HttpStatus.UNPROCESSABLE_ENTITY)
-                    .body("Hayvan ırk bilgileri geçersiz veya eksik.");
-        }
         return ResponseEntity.status(HttpStatus.OK).body(hayvanIrkList);
     }
 
