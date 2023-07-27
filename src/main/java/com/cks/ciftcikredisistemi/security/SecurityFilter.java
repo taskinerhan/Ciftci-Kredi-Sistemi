@@ -13,13 +13,13 @@ import java.io.IOException;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
-    private static final String x_secure_key = "x-secure-key";
-    private static final String authorization_key  = "6RcVRuwxUr07F54B7a9IPomjh";
+    private static final String SECURE_KEY_HEADER  = "x-secure-key";
+    private static final String SECURE_KEY_HEADER_VALUE   = "6RcVRuwxUr07F54B7a9IPomjh";
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String secureKey = request.getHeader(x_secure_key);
-        if (StringUtils.isEmpty(secureKey) || !secureKey.equals(authorization_key)) {
+        String secureKey = request.getHeader(SECURE_KEY_HEADER);
+        if (StringUtils.isEmpty(secureKey) || !secureKey.equals(SECURE_KEY_HEADER_VALUE)) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             return;
         }

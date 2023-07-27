@@ -11,9 +11,6 @@ import java.util.List;
 public interface KrediYonetimRepository extends JpaRepository<KrediBasvuru,Long> {
     KrediBasvuru findKrediBasvuruById(long Id);
     List<KrediBasvuru> findKrediBasvurularByCiftciId(long id);
-    List<KrediBasvuru> findKrediBasvurularByCiftciIdAndKrediDurum(long id, KrediDurum krediDurum);
-
-
-
+    List<KrediBasvuru> findKrediBasvurularByCiftciIdAndKrediDurum(long id,KrediDurum krediDurum);
 
 }

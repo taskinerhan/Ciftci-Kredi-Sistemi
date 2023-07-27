@@ -17,11 +17,12 @@ import static com.cks.ciftcikredisistemi.enums.KrediDurum.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("kredi-yonetimi")
 public class KrediYonetimController {
     private final KrediYonetimRepository krediYonetimRepository;
     private final CiftciYonetimiRepository ciftciYonetimiRepository;
 
-    @PostMapping("/kredi-yonetimi")
+    @PostMapping()
     public ResponseEntity<?> krediBasvuru(@RequestBody KrediBasvuruDto krediBasvuruDto) {
         long ciftciId = krediBasvuruDto.getCiftciId();
         Ciftci ciftci = ciftciYonetimiRepository.findCiftciById(ciftciId);
@@ -37,7 +38,7 @@ public class KrediYonetimController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Kredi başvurusu başarılı bir şekilde oluşturuldu");
     }
 
-    @PostMapping("/kredi-yonetimi/{id}/degerlendir")
+    @PostMapping("/{id}/degerlendir")
     public ResponseEntity<?> krediBasvuruDegerlendir(@PathVariable(name = "id") Long id) {
         KrediBasvuru krediBasvuru = krediYonetimRepository.findKrediBasvuruById(id);
         if (krediBasvuru.getKrediDurum() == REDDEDILMIS) {
@@ -49,7 +50,7 @@ public class KrediYonetimController {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Kredi başvurusu bulunamadı.");
     }
 
-    @GetMapping("/kredi-yonetimi/krediler")
+    @GetMapping("/krediler")
     public ResponseEntity<List<KrediBasvuru>> krediler() {
         List<KrediBasvuru> krediBasvuruList = krediYonetimRepository.findAll();
         if (krediBasvuruList.isEmpty()) {
@@ -58,7 +59,7 @@ public class KrediYonetimController {
         return ResponseEntity.status(HttpStatus.OK).body(krediBasvuruList);
     }
 
-    @GetMapping("/kredi-yonetimi/krediler/{id}")
+    @GetMapping("/krediler/{id}")
     public ResponseEntity<?> krediBilgisi(@PathVariable(name = "id") Long id) {
         KrediBasvuru krediBasvuru = krediYonetimRepository.findKrediBasvuruById(id);
         if (krediBasvuru == null) {
@@ -67,7 +68,7 @@ public class KrediYonetimController {
         return ResponseEntity.status(HttpStatus.OK).body(krediBasvuru);
     }
 
-    @GetMapping("/kredi-yonetimi/ciftciler/{id}")
+    @GetMapping("/ciftciler/{id}")
     public ResponseEntity<?> ciftciBilgisi(@PathVariable(name = "id") Long id) {
         List<KrediBasvuru> krediBasvuruList = krediYonetimRepository.findKrediBasvurularByCiftciId(id);
         if (krediBasvuruList.isEmpty()) {
@@ -76,7 +77,7 @@ public class KrediYonetimController {
         return ResponseEntity.status(HttpStatus.OK).body(krediBasvuruList);
     }
 
-    @GetMapping("/kredi-yonetimi/ciftciler/{id}/{krediDurum}")
+    @GetMapping("/ciftciler/{id}/{krediDurum}")
     public ResponseEntity<?> ciftciKrediDurumuBilgisi(@PathVariable(name = "id") Long id,
                                                       @PathVariable(name = "krediDurum") KrediDurum krediDurum) {
         List<KrediBasvuru> ciftciKrediBasvurulari = krediYonetimRepository.findKrediBasvurularByCiftciIdAndKrediDurum(id, krediDurum);

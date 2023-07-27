@@ -22,28 +22,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("ciftci-yonetimi")
 public class CiftciYonetimController {
-
     private final CiftciYonetimiRepository ciftciYonetimiRepository;
-
-    @PostMapping("ciftci-yonetimi")
+    @PostMapping("")
     public ResponseEntity<?> ciftciEkle(@RequestBody CiftciDto ciftciDto) {
         if (ciftciDto == null) {
             return ResponseEntity
                     .status(HttpStatus.UNPROCESSABLE_ENTITY)
                     .body("Çiftçi bilgileri geçersiz veya eksik.");
         }
-        Ciftci ciftci = new Ciftci();
-        ciftci.setAd(ciftciDto.getAd());
-        ciftci.setSoyad(ciftciDto.getSoyad());
-        ciftci.setCinsiyet(ciftciDto.getCinsiyet());
-        ciftci.setTcko(ciftciDto.getTcko());
-        ciftci.setDogumTarihi(ciftciDto.getDogumTarihi());
-        ciftciYonetimiRepository.save(ciftci);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Çiftçi eklendi");
+        if(ciftciYonetimiRepository.findByTcko(ciftciDto.getTcko())==null){
+            Ciftci ciftci = new Ciftci();
+            ciftci.setAd(ciftciDto.getAd());
+            ciftci.setSoyad(ciftciDto.getSoyad());
+            ciftci.setCinsiyet(ciftciDto.getCinsiyet());
+            ciftci.setTcko(ciftciDto.getTcko());
+            ciftci.setDogumTarihi(ciftciDto.getDogumTarihi());
+            ciftciYonetimiRepository.save(ciftci);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Çiftçi eklendi");
+        }
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body("Aynı TC kimlik numaralı kayıt var");
     }
     @SneakyThrows
-    @PostMapping(value = "/ciftci-yonetimi/yukle", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/yukle", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> ciftciList(@RequestParam(name = "csvFile") MultipartFile csvFile) {
         List<CsvBean> csvBeanList;
         try (Reader reader = new InputStreamReader(csvFile.getInputStream())) {
@@ -52,10 +56,15 @@ public class CiftciYonetimController {
                     .build();
             csvBeanList = cb.parse();
         }
-        List<Ciftci> ciftciList = new ArrayList<>();
 
+        List<Ciftci> ciftciList = new ArrayList<>();
         for (CsvBean csvBean : csvBeanList) {
             CiftciDto ciftciDto = (CiftciDto) csvBean;
+            if(ciftciYonetimiRepository.findByTcko(ciftciDto.getTcko())!=null){
+                return ResponseEntity
+                        .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                        .body(ciftciDto.getTcko() +" TC kimlik numaralı kayıt var");
+            }
             Ciftci ciftci = new Ciftci();
             ciftci.setAd(ciftciDto.getAd());
             ciftci.setSoyad(ciftciDto.getSoyad());
@@ -68,7 +77,7 @@ public class CiftciYonetimController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Başarılı bir şekilde oluşturuldu");
     }
 
-    @GetMapping("/ciftci-yonetimi/ciftciler")
+    @GetMapping("/ciftciler")
     public ResponseEntity<List<Ciftci>> ciftciListGetir() {
         List<Ciftci> ciftciList = ciftciYonetimiRepository.findAll();
         if (ciftciList.isEmpty()) {
@@ -79,7 +88,7 @@ public class CiftciYonetimController {
         return ResponseEntity.status(HttpStatus.OK).body(ciftciList);
     }
 
-    @GetMapping("/ciftci-yonetimi/ciftciler/{id}")
+    @GetMapping("/ciftciler/{id}")
     public ResponseEntity<?> ciftciGetir(@PathVariable(name = "id") Long id) {
         Ciftci ciftci = ciftciYonetimiRepository.findCiftciById(id);
         if (ciftci == null) {
