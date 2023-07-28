@@ -2,7 +2,16 @@ package com.cks.ciftcikredisistemi.entity.hayvan;
 
 import com.cks.ciftcikredisistemi.entity.base.BaseEntity;
 import com.cks.ciftcikredisistemi.enums.Cinsiyet;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +38,7 @@ public class HayvanGelirIliskisi extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "hayvansal_gelir_id")
     private HayvansalGelir hayvansalGelir;
-
+    @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "hayvan_irk_id")
     private HayvanIrk hayvanIrk;
