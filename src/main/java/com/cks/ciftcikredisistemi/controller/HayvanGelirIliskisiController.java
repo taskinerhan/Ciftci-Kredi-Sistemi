@@ -60,6 +60,11 @@ public class HayvanGelirIliskisiController {
     public ResponseEntity<?> irkIdGelir(@PathVariable(name = "id") Long id, @PathVariable(name = "cinsiyet") Cinsiyet cinsiyet) {
         HayvanIrk hayvanIrk = hayvanIrkRepository.findHayvanIrkById(id);
         List<HayvanGelirIliskisi> hayvanGelirIliskisiList = hayvanGelirIliskisiRepository.findByHayvanIrkIdAndCinsiyet(hayvanIrk, cinsiyet);
+        if (hayvanGelirIliskisiList.isEmpty()) {
+            return ResponseEntity
+                    .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                    .body("Elemanlar bulunulamadı");
+        }
         return ResponseEntity.status(HttpStatus.OK).body(hayvanGelirIliskisiList);
     }
 }
