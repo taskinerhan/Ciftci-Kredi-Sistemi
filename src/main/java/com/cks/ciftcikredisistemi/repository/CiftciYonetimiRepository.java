@@ -5,8 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CiftciYonetimiRepository extends JpaRepository<Ciftci,Long>{
-     Ciftci findCiftciById(Long id);
-     Ciftci findByTcko(String tcko);
+public interface CiftciYonetimiRepository extends JpaRepository<Ciftci, Long> {
+    Ciftci findCiftciById(Long id);
+
+    Ciftci findByTcko(String tcko);
 
 }

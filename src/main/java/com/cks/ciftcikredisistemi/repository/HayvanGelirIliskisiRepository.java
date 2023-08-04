@@ -12,5 +12,7 @@ import java.util.List;
 public interface HayvanGelirIliskisiRepository extends JpaRepository<HayvanGelirIliskisi, Long> {
     List<HayvanGelirIliskisi> findByHayvanIrk(HayvanIrk hayvanIrk);
 
-    List<HayvanGelirIliskisi> findByHayvanIrkIdAndCinsiyet(HayvanIrk hayvanIrk, Cinsiyet cinsiyet);
+    List<HayvanGelirIliskisi> findByHayvanIrkAndCinsiyet(HayvanIrk hayvanIrk, Cinsiyet cinsiyet);
+
+
 }
