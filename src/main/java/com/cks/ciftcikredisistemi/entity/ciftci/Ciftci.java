@@ -3,13 +3,19 @@ package com.cks.ciftcikredisistemi.entity.ciftci;
 import com.cks.ciftcikredisistemi.entity.base.BaseEntity;
 import com.cks.ciftcikredisistemi.entity.kredi.KrediBasvuru;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -30,10 +36,10 @@ public class Ciftci extends BaseEntity {
     private Date dogumTarihi;
 
     @JsonManagedReference
-    @OneToMany(mappedBy="ciftci")
-    private Set<KrediBasvuru> krediBasvuru;
+    @OneToMany(mappedBy = "ciftci")
+    private Set<KrediBasvuru> krediBasvuru = new HashSet<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy="ciftci")
-    private Set<CiftciVarlik> ciftciVarlik;
+    @OneToMany(mappedBy = "ciftci")
+    private Set<CiftciVarlik> ciftciVarlik = new HashSet<>();
 }

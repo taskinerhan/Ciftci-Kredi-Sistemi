@@ -6,17 +6,20 @@ import com.cks.ciftcikredisistemi.repository.HayvansalGiderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("hayvansal-gider-yonetimi")
 @RequiredArgsConstructor
 public class HayvansalGiderController {
-    private HayvansalGiderRepository hayvansalGiderRepository;
+    private final HayvansalGiderRepository hayvansalGiderRepository;
 
-    @PostMapping("")
+    @PostMapping("hayvansal-gider-yonetimi")
     public ResponseEntity<?> hayvanGiderEkle(@RequestBody HayvansalGiderDto hayvansalGiderDto) {
         if (hayvansalGiderDto == null) {
             return ResponseEntity

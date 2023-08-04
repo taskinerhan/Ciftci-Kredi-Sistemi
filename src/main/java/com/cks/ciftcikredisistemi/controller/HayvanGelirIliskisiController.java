@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("hayvan-gider-iliskisi-yonetimi")
+@RequestMapping("hayvan-gelir-iliskisi-yonetimi")
 @RequiredArgsConstructor
 public class HayvanGelirIliskisiController {
     private final HayvanGelirIliskisiRepository hayvanGelirIliskisiRepository;
@@ -37,7 +37,7 @@ public class HayvanGelirIliskisiController {
         }
         HayvanGelirIliskisi hayvanGelirIliskisi = new HayvanGelirIliskisi();
         hayvanGelirIliskisi.setCinsiyet(hayvanGelirIlisikisiDto.getCinsiyet());
-        hayvanGelirIliskisi.setBigDecimal(hayvanGelirIlisikisiDto.getBigDecimal());
+        hayvanGelirIliskisi.setMiktar(hayvanGelirIlisikisiDto.getMiktar());
 
         HayvansalGelir hayvansalGelir = hayvansalGelirRepository.findHayvansalGelirById(hayvanGelirIlisikisiDto.getHayvansalGelirId());
         hayvanGelirIliskisi.setHayvansalGelir(hayvansalGelir);
@@ -59,7 +59,7 @@ public class HayvanGelirIliskisiController {
     @GetMapping("irklar/{id}/{cinsiyet}/gelirler")
     public ResponseEntity<?> irkIdGelir(@PathVariable(name = "id") Long id, @PathVariable(name = "cinsiyet") Cinsiyet cinsiyet) {
         HayvanIrk hayvanIrk = hayvanIrkRepository.findHayvanIrkById(id);
-        List<HayvanGelirIliskisi> hayvanGelirIliskisiList = hayvanGelirIliskisiRepository.findByHayvanIrkIdAndCinsiyet(hayvanIrk, cinsiyet);
+        List<HayvanGelirIliskisi> hayvanGelirIliskisiList = hayvanGelirIliskisiRepository.findByHayvanIrkAndCinsiyet(hayvanIrk, cinsiyet);
         if (hayvanGelirIliskisiList.isEmpty()) {
             return ResponseEntity
                     .status(HttpStatus.UNPROCESSABLE_ENTITY)

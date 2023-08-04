@@ -1,13 +1,17 @@
 package com.cks.ciftcikredisistemi.controller;
 
 import com.cks.ciftcikredisistemi.dto.HayvansalGelirDto;
-import com.cks.ciftcikredisistemi.entity.hayvan.HayvanIrk;
 import com.cks.ciftcikredisistemi.entity.hayvan.HayvansalGelir;
 import com.cks.ciftcikredisistemi.repository.HayvansalGelirRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,7 +19,8 @@ import java.util.List;
 @RequestMapping("hayvansal-gelir-yonetimi")
 @RequiredArgsConstructor
 public class HayvansalGelirController {
-    private HayvansalGelirRepository hayvansalGelirRepository;
+    private final HayvansalGelirRepository hayvansalGelirRepository;
+
     @PostMapping("")
     public ResponseEntity<?> hayvanIrkEkle(@RequestBody HayvansalGelirDto hayvansalGelirDto) {
         if (hayvansalGelirDto == null) {
@@ -31,25 +36,23 @@ public class HayvansalGelirController {
 
         return ResponseEntity.status(HttpStatus.OK).body("Başarılı bir şekilde oluşturuldu");
     }
+
     @GetMapping("gelirler ")
     public ResponseEntity<?> hayvanIrkListGetir() {
         List<HayvansalGelir> hayvanIrkList = hayvansalGelirRepository.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(hayvanIrkList);
     }
+
     @GetMapping("gelirler/{id}")
     public ResponseEntity<?> hayvanIrkIdGetir(@PathVariable(name = "id") Long id) {
-        HayvansalGelir hayvansalGelir=hayvansalGelirRepository.findHayvansalGelirById(id);
-        if(hayvansalGelir==null){
+        HayvansalGelir hayvansalGelir = hayvansalGelirRepository.findHayvansalGelirById(id);
+        if (hayvansalGelir == null) {
             return ResponseEntity
                     .status(HttpStatus.UNPROCESSABLE_ENTITY)
                     .body("Girilen bilgiler geçersiz veya eksik.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(hayvansalGelir);
     }
-
-
-
-
 
 
 }
