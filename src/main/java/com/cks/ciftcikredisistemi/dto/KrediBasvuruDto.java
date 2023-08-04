@@ -1,6 +1,10 @@
 package com.cks.ciftcikredisistemi.dto;
 
-import lombok.*;
+import com.cks.ciftcikredisistemi.enums.KrediDurum;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -11,4 +15,5 @@ import java.math.BigDecimal;
 public class KrediBasvuruDto {
     private long ciftciId;
     private BigDecimal miktar;
+    private KrediDurum krediDurum;
 }

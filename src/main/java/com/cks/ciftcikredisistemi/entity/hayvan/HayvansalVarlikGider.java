@@ -2,7 +2,17 @@ package com.cks.ciftcikredisistemi.entity.hayvan;
 
 import com.cks.ciftcikredisistemi.entity.base.BaseEntity;
 import com.cks.ciftcikredisistemi.enums.Birim;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,9 +39,11 @@ public class HayvansalVarlikGider extends BaseEntity {
     private BigDecimal miktar;
     private BigDecimal toplamFiyat;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "hayvansal_gider_id")
     private HayvansalGider hayvansalGider;
+
 
     @ManyToOne
     @JoinColumn(name = "hayvansal_varlik_id")

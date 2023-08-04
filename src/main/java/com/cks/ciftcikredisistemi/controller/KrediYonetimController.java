@@ -2,8 +2,10 @@ package com.cks.ciftcikredisistemi.controller;
 
 import com.cks.ciftcikredisistemi.dto.KrediBasvuruDto;
 import com.cks.ciftcikredisistemi.entity.ciftci.Ciftci;
+import com.cks.ciftcikredisistemi.entity.ciftci.CiftciVarlik;
 import com.cks.ciftcikredisistemi.entity.kredi.KrediBasvuru;
 import com.cks.ciftcikredisistemi.enums.KrediDurum;
+import com.cks.ciftcikredisistemi.repository.CiftciVarlikRepository;
 import com.cks.ciftcikredisistemi.repository.CiftciYonetimiRepository;
 import com.cks.ciftcikredisistemi.repository.KrediYonetimRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static com.cks.ciftcikredisistemi.enums.KrediDurum.DEGERLENDIRME_BEKLIYOR;
-import static com.cks.ciftcikredisistemi.enums.KrediDurum.REDDEDILMIS;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +28,7 @@ import static com.cks.ciftcikredisistemi.enums.KrediDurum.REDDEDILMIS;
 public class KrediYonetimController {
     private final KrediYonetimRepository krediYonetimRepository;
     private final CiftciYonetimiRepository ciftciYonetimiRepository;
+    private final CiftciVarlikRepository ciftciVarlikRepository;
 
     @PostMapping()
     public ResponseEntity<?> krediBasvuru(@RequestBody KrediBasvuruDto krediBasvuruDto) {
@@ -38,17 +40,24 @@ public class KrediYonetimController {
         KrediBasvuru krediBasvuru = new KrediBasvuru();
         krediBasvuru.setCiftci(ciftci);
         krediBasvuru.setTalepEdilenKrediMiktari(krediBasvuruDto.getMiktar());
+        krediBasvuru.setKrediDurum(krediBasvuruDto.getKrediDurum());
+        CiftciVarlik ciftciVarlik = new CiftciVarlik();
+        ciftciVarlik.setCiftci(ciftci);
+        ciftciVarlik.setKrediBasvuru(krediBasvuru);
         ciftci.getKrediBasvuru().add(krediBasvuru);
         krediYonetimRepository.save(krediBasvuru);
         ciftciYonetimiRepository.save(ciftci);
+        ciftciVarlikRepository.save(ciftciVarlik);
         return ResponseEntity.status(HttpStatus.CREATED).body("Kredi başvurusu başarılı bir şekilde oluşturuldu");
     }
 
     @PostMapping("/{id}/degerlendir")
     public ResponseEntity<?> krediBasvuruDegerlendir(@PathVariable(name = "id") Long id) {
         KrediBasvuru krediBasvuru = krediYonetimRepository.findKrediBasvuruById(id);
-        if (krediBasvuru.getKrediDurum() == REDDEDILMIS) {
+        if (krediBasvuru.getKrediDurum() == null) {
             krediBasvuru.setKrediDurum(DEGERLENDIRME_BEKLIYOR);
+            krediYonetimRepository.save(krediBasvuru);
+
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body("Başvuru DEGERLENDIRME_BEKLIYOR durumuna getirildi");

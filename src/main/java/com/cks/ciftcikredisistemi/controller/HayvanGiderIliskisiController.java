@@ -38,7 +38,7 @@ public class HayvanGiderIliskisiController {
 
         HayvansalGiderIliskisi hayvansalGiderIliskisi = new HayvansalGiderIliskisi();
         hayvansalGiderIliskisi.setCinsiyet(hayvansalGiderIliskisDto.getCinsiyet());
-        hayvansalGiderIliskisi.setBigDecimal(hayvansalGiderIliskisDto.getBigDecimal());
+        hayvansalGiderIliskisi.setMiktar(hayvansalGiderIliskisDto.getBigDecimal());
 
         HayvansalGider hayvansalGider = hayvansalGiderRepository.findHayvansalGiderById(hayvansalGiderIliskisDto.getHayvansalGiderId());
         hayvansalGiderIliskisi.setHayvansalGider(hayvansalGider);

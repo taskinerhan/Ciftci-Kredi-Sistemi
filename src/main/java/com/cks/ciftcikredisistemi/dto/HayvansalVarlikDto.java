@@ -19,7 +19,5 @@ public class HayvansalVarlikDto {
 
     private BigDecimal hayvanAdeti;
 
-    private BigDecimal toplamVarlikDegeri;
-
     private Cinsiyet cinsiyet;
 }

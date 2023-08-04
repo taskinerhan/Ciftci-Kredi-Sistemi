@@ -33,7 +33,7 @@ public class HayvanGelirIliskisi extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Cinsiyet cinsiyet;
 
-    private BigDecimal bigDecimal;
+    private BigDecimal miktar;
 
     @OneToOne
     @JoinColumn(name = "hayvansal_gelir_id")
@@ -43,7 +43,4 @@ public class HayvanGelirIliskisi extends BaseEntity {
     @JoinColumn(name = "hayvan_irk_id")
     private HayvanIrk hayvanIrk;
 
-    @OneToOne
-    @JoinColumn(name = "hayvansal_gider_id")
-    private HayvansalGider hayvansalGider;
 }

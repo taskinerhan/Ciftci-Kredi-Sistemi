@@ -15,9 +15,10 @@ import java.math.BigDecimal;
 public class HayvanGelirIlisikisiDto {
     private Long hayvanIrkId;
 
+
     private Long hayvansalGelirId;
 
     private Cinsiyet cinsiyet;
 
-    private BigDecimal bigDecimal;
+    private BigDecimal miktar;
 }
